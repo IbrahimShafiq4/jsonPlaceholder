@@ -1,0 +1,175 @@
+<div class="mx-auto d-flex justify-content-center mb-4">
+    <div class="create-post d-flex flex-column gap-3 w-50 p-3">
+        <div class="create-post-header d-flex flex-column gap-3">
+            <div class="header d-flex align-items-center justify-content-between px-4 py-2">
+                <p class="mb-0 fw-bold">Create Post</p>
+                <button class="btn btn-danger px-1 py-0 rounded-1" (click)="cancelPost()" type="button">X</button>
+            </div>
+            <div class="create-post-user-info d-flex align-items-start justify-content-between">
+                <div class="create-post-user-name">
+                    @for(user of users; track $index) {
+                        @if(user.id == userId) {
+                            @if (validUserName) {
+                                <h3>{{ user.name }}</h3>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <form class="d-flex flex-column gap-3" [formGroup]="createPost" (ngSubmit)="addPost()">
+            @if (!validUserName) {
+                <input type="text" class="form-control" placeholder="your name?">
+            }
+            <div class="create-post-body">
+                <textarea class="form-control" placeholder="What do you think ?" formControlName="postValue"></textarea>
+            </div>
+            <div class="create-post-button">
+                <button class="btn btn-primary w-100 rounded-1" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    @for (post of posts; track $index) {
+    <div class="col-lg-6 col-md-12">
+        <div class="post">
+            <div class="post-header">
+                <div class="post-info d-flex justify-content-between align-items-baseline w-100">
+                    @for(user of users; track $index) {
+                    @if (post.userId === user.id) {
+                    <div class="d-flex align-items-baseline gap-md-3 gap-1">
+                        <div>
+                            <h3 class="username">{{ user.name.slice(0, 13) }}</h3>
+                            <p class="post-time">{{ date + 'H Ago' }}</p>
+                        </div>
+                        <div>
+                            <p class="mb-0 author rounded-1 text-white">Author</p>
+                        </div>
+                    </div>
+                    }
+                    }
+                    <div class="d-flex flex-column position-relative dropdown">
+                        <i class="fa-solid fa-ellipsis-vertical" (click)="onOpenDropdown(post.id, 'post')"></i>
+                        @if (isOpen[post.id]) {
+                        <div class="dropdown-item" (click)="onDelete(post.id, 'post')">
+                            <ul class="list-unstyled">
+                                <li>Delete</li>
+                            </ul>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- Post content -->
+            <div class="post-content">
+                <p>{{ post.title.slice(0, 5) }}</p>
+                <p>{{ post.body.slice(0, 80) }}</p>
+            </div>
+            <!-- Post actions -->
+            <div class="post-actions">
+                <button class="like-button" (click)="postLike(post.id)">
+                    {{ likes[post.id] ? (likes[post.id] > 1 ? likes[post.id] + ' Likes' : likes[post.id] + ' Like') :
+                    'Like' }}
+                </button>
+                <button class="comment-button" (click)="showComments(post.id)">Comment</button>
+                <button class="share-button">Share</button>
+            </div>
+            <!-- Post comments -->
+            <div class="post-comments">
+                <!-- Show comments if post is selected and showComment is true -->
+                @if (showComment && post.id === currentPostId) {
+                    @for (comment of comments; track $index) {
+                        @if(comment.postId === post.id) {
+                            <div class="post-comment d-flex flex-column gap-2 my-4">
+                                <!-- Comment header -->
+                                <div class="comment-header d-flex w-100 justify-content-between">
+                                    <!-- Comment information -->
+                                    <div class="comment-info">
+                                        <p class="mb-0 comment-username">{{ comment.name.slice(0, 10) }}</p>
+                                        <p class="my-1 comment-email">{{ comment.email }}</p>
+                                        <p class="mb-0 comment-time">{{ date + 'H Ago' }}</p>
+                                    </div>
+                                    <!-- Comment dropdown -->
+                                    <div class="d-flex flex-column position-relative dropdown">
+                                        <i class="fa-solid fa-ellipsis-vertical"
+                                            (click)="onOpenDropdown(comment.id, 'comment')"></i>
+                                        @if (isCommentOpened[comment.id]) {
+                                        <div class="dropdown-item" (click)="onDelete(post.id, 'comment', comment.id)">
+                                            <ul class="list-unstyled">
+                                                <li>Delete</li>
+                                            </ul>
+                                        </div>
+                                        }
+                                    </div>
+                                </div>
+                                <!-- Comment content -->
+                                <div class="comment-content px-3">
+                                    <p class="mb-0 comment-text">{{ comment.body }}</p>
+                                    <div class="comment-actions d-flex gap-2 my-2 flex-column">
+                                        <div class="d-flex gap-2">
+                                            <button class="comment-like" (click)="commentLike(comment.id)">
+                                                {{ commentLikes[comment.id] ? (commentLikes[comment.id] > 1 ?
+                                                commentLikes[comment.id] +
+                                                ' Likes' : commentLikes[comment.id] + ' Like') :
+                                                'Like' }}
+                                            </button>
+                                            <button class="comment-button" (click)="addReplay(comment.id)">Replay</button>
+                                        </div>
+                                        @if (allowReplay[comment.id]) {
+                                        <form [formGroup]="commentReplayForm" (ngSubmit)="onSubmitCommentReplay(comment.id)"
+                                            class="replay-comment d-flex gap-lg-2 gap-md-2 gap-1 ps-lg-5 ps-md-2 ps-1">
+                                            <input type="text" class="form form-control" formControlName="commentInput">
+                                            <button class="btn btn-info" type="submit"
+                                                [disabled]="commentReplayForm.invalid">Add</button>
+                                            <button class="btn btn-danger removeBtn" type="button"
+                                                (click)="removeReplay(comment.id)">X</button>
+                                        </form>
+                                        }
+
+                                        @if (replay[comment.id]) {
+                                        <div class="px-5 p-2 my-2">
+                                            @for (replayText of replay[comment.id]; track replay; let index = $index) {
+                                            <div class="ps-lg-5 ps-md-2 ps-1 my-2">
+
+                                                <div class="replies">
+                                                    @for (user of users; track $index) {
+                                                        @if (user.id === post.userId && comment.postId === post.id) {
+                                                        <div class="replay d-flex justify-content-between align-items-baseline">
+                                                            <div class="d-flex flex-column">
+                                                                <p class="comment-replay-user-name mb-0">{{ user.name }}</p>
+                                                                <p class="comment-replay-user-email mb-0 px-1">{{ user.email }}</p>
+                                                            </div>
+                                                            <div class="d-flex flex-column position-relative dropdown">
+                                                                <i class="fa-solid fa-ellipsis-vertical"
+                                                                    (click)="onOpenDropdown(index, 'replay')"></i>
+                                                                @if (isReplayOpened[index]) {
+                                                                <div class="dropdown-item"
+                                                                    (click)="onDelete(post.id, 'replay', comment.id, index)">
+                                                                    <ul class="list-unstyled">
+                                                                        <li>Delete</li>
+                                                                    </ul>
+                                                                </div>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        <p class="fw-semibold fs-5 mb-0 px-3">{{ replayText }}</p>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                            }
+                                        </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    }
+</div>

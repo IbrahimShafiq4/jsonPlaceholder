@@ -1,0 +1,289 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+
+.username, .comment-username, h3 {
+    font-family: "Bungee", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+input, textarea {
+    background-color: transparent;
+    border: none;
+    transition: 0.2s linear;
+}
+
+textarea {
+    resize: none;
+    width: 100%;
+    height: 150px;
+}
+
+textarea:focus,
+input:focus {
+    background-color: transparent;
+    box-shadow: 0 0 0 0.1rem rgba(88, 143, 243, 0.4);
+}
+
+.create-post {
+    box-shadow: 0 0 0 0.1rem rgba(88, 143, 243, 0.4);
+    border-radius: 5px;
+
+    .header {
+        box-shadow: 0 0 0 0.1rem rgba(88, 143, 243, 0.4);
+        border-radius: 5px;
+    }
+}
+
+.dropdown i {
+    cursor: pointer;
+}
+
+.dropdown-item {
+    cursor: pointer;
+    background-color: #f37588;
+    padding: 5px;
+    position: absolute;
+    top: 35px;
+    left: -33px;
+    width: fit-content;
+
+    z-index: 1000;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 5px;
+
+    ul {
+        margin-bottom: 0 !important;
+    }
+}
+
+.dropdown-item::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 62%;
+    border-top: 8px solid #f37588;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+    width: 8px;
+    height: 8px;
+    transform: rotate(180deg) translateY(8px) translateX(0px);
+}
+
+
+.post {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.post-info .author {
+    padding: 5px 10px;
+    background-color: rgba(88, 143, 243, 1);
+}
+
+@media (max-width: 767px) {
+    .post-info .author {
+        padding: 2px 5px;
+        font-size: 10px;
+    }
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.username {
+    margin: 0;
+    font-weight: bold;
+}
+
+.post-content {
+    margin-bottom: 12px;
+}
+
+.post-content p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.post-image {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.post-actions {
+    display: flex;
+}
+
+.post-actions button {
+    background-color: #f0f2f5;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.post-actions button:hover {
+    background-color: #ddd;
+}
+
+.post {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.username {
+    margin: 0;
+    font-weight: bold;
+}
+
+@media (max-width: 992px) {
+    .username {
+        font-size: 20px
+    }
+}
+
+@media (max-width: 767px) {
+    .username {
+        font-size: 16px
+    }
+}
+
+.post-time {
+    margin: 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.post-content {
+    margin-bottom: 12px;
+}
+
+.post-content p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.post-image {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.post-actions {
+    display: flex;
+}
+
+.post-actions button:not(.removeBtn),
+.comment-actions button:not(.removeBtn) {
+    background-color: rgba(88, 143, 243, 0.8);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-right: 8px;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+.post-actions button:not(.removeBtn):hover,
+.comment-actions button:not(.removeBtn):hover {
+    background-color: rgba(88, 143, 243, 1);
+}
+
+@media (max-width: 992px) {
+    .post-actions button:not(.removeBtn),
+    .comment-actions button:not(.removeBtn) {
+        padding: 4px 10px
+    }
+}
+
+@media (max-width: 767px) {
+    .post-actions button:not(.removeBtn),
+    .comment-actions button:not(.removeBtn) {
+        padding: 4px 8px
+    }
+}
+
+.comment-profile-picture {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.comment-content {
+    flex: 1;
+}
+
+.comment-username {
+    margin: 0;
+    font-weight: bold;
+}
+
+.comment-email {
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.comment-text {
+    margin: 0;
+    line-height: 1.6;
+}
+@media (max-width: 767px) {
+    .post-time, .comment-time {
+        font-size: 0.7em;
+    }
+}
+
+.replies {
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+@media (max-width: 767px) {
+    .replies {
+        padding: 5px 10px;
+    }
+}
+
+.comment-replay-user-name {
+    font-size: 16px;
+
+}
+
+.comment-replay-user-email {
+    font-size: 10px;
+}
+

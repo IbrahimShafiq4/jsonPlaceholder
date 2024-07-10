@@ -1,0 +1,14 @@
+<div class="row">
+    @for (user of users; track $index) {
+            <div class="my-5">
+                {{ user.username }}
+                @for (album of albums; track $index) {
+                    @if (user.userId === album.userId) {
+                        <div>
+                            {{ album.title }}
+                        </div>
+                    }
+                }
+            </div>
+        }
+</div>

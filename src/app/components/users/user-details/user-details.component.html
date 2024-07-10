@@ -1,0 +1,60 @@
+<main class="grid">
+    <div class="content item1">
+        <h1>{{ userDetails?.name }}</h1>
+        <p class="mb-0">{{ userPosts }} posts</p>
+    </div>
+
+    <div class="card item2">
+        <p class="mb-0">
+            <span class="fs-5 fw-bolder">userName:</span> {{ userDetails?.username }}
+        </p>
+    </div>
+
+    <div class="card item3 text-start gap-2">
+        <p class="mb-0">
+            <span class="fs-5 fw-bolder">Email:</span> {{ userDetails?.email }}
+        </p>
+    </div>
+
+    <div class="card item4">
+        <p class="mb-0">
+            <span class="fs-5 fw-bolder">Phone:</span> {{ userDetails?.phone }}
+        </p>
+    </div>
+
+    <div class="card item5">
+        <p class="mb-0">
+            <span class="fs-5 fw-bolder">City:</span> {{ userDetails?.address?.city }}
+        </p>
+    </div>
+
+    <div class="card item7 gap-3">
+        <p class="mb-0">
+            <span class="fs-5 fw-bolder">CatchPhrase:</span> {{ userDetails?.company?.catchPhrase }}
+        </p>
+    </div>
+
+    <div class="card item8">
+        <p class="mb-0">
+            <span class="fs-5 fw-bolder">Company:</span> {{ userDetails?.company?.name }}
+        </p>
+    </div>
+    
+    <div class="card item9">
+        <p class="mb-0">
+            <span class="fs-5 fw-bolder">Website:</span> {{ userDetails?.website }}
+        </p>
+    </div>
+
+    <div class="card item10">
+        <p class="mb-0">
+            <span class="fs-5 fw-bolder">bs:</span> {{ userDetails?.company?.bs }}
+        </p>
+    </div>
+    <div class="card item11">
+        <p class="mb-0">
+            <span class="fs-5 fw-bolder">Street:</span> {{ userDetails?.address?.street }}
+        </p>
+    </div>
+
+</main>

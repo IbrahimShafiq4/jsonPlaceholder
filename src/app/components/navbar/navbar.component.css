@@ -1,0 +1,19 @@
+li {
+    padding: 0.1rem 0.2rem !important;
+    transition: var(--main-transition);
+}
+
+.activeLink {
+    background-color: #634ac2;
+    a {
+        color: #fff;
+    }
+}
+
+a {
+    font-family: cursive;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: var(--main-transition);
+}
